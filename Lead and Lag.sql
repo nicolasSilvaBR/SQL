@@ -14,6 +14,19 @@ from PREVIOUS rows along with data from the current row.
 
 */
 
+SELECT
+	SalesOrderID,
+	OrderDate,
+	CustomerID,
+	TotalDue,
+	NextTotalDue = LEAD(TotalDue, 1) OVER(ORDER BY SalesOrderID),
+	PrevTotalDue = LAG(TotalDue, 1) OVER(ORDER BY SalesOrderID)
+
+FROM AdventureWorks2019.Sales.SalesOrderHeader
+
+ORDER BY SalesOrderID
+
+
 /*
 "Next2OrderByEmployeeVendor" that returns, within the group of all orders 
 that have the same EmployeeID, the vendor name offset TWO orders into the 
