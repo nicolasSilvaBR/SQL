@@ -26,6 +26,20 @@ FROM AdventureWorks2019.Sales.SalesOrderHeader
 
 ORDER BY SalesOrderID
 
+--Using PARTITION with LEAD and LAG
+
+SELECT
+	SalesOrderID,
+	OrderDate,
+	CustomerID,
+	TotalDue,
+	NextTotalDue = LEAD(TotalDue, 1) OVER(PARTITION BY CustomerID ORDER BY SalesOrderID),
+	PrevTotalDue = LAG(TotalDue, 1) OVER(PARTITION BY CustomerID ORDER BY SalesOrderID)
+
+FROM AdventureWorks2019.Sales.SalesOrderHeader
+
+ORDER BY CustomerID, SalesOrderID
+
 
 /*
 "Next2OrderByEmployeeVendor" that returns, within the group of all orders 
