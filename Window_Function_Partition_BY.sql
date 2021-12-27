@@ -1,10 +1,13 @@
 -- WINDOW FUNCTION
 -- PARTITION BY
 /*
+******** DataBase = AdventureWorks2019 ********
+
 The PARTITION BY clause divides a query's result set into partitions. 
 The window function is operated on each partition separately and 
 recalculate for each partition. ... If you omit the PARTITION BY clause, 
 the whole result set is treated as a single partition.
+
 */
 
 /*"AvgPriceByCategory " that returns the average ListPrice for 
