@@ -28,7 +28,7 @@ SELECT
 	pp.VendorID,
 	PrevOrderFromVendorAmt = LAG(pp.TotalDue,1) OVER(partition by pp.VendorID ORDER BY pp.OrderDate),
 	NextOrderByEmployeeVendor = LEAD(pv.Name,1)	OVER(partition by pp.EmployeeID ORDER BY pp.OrderDate ),
-	Next2OrderByEmployeeVendor = LEAD(pv.name)
+	Next2OrderByEmployeeVendor = LEAD(pv.name,2) OVER(partition by pp.EmployeeID ORDER BY pp.OrderDate )
 
 FROM Purchasing.PurchaseOrderHeader AS pp
 INNER JOIN Purchasing.Vendor as pv
