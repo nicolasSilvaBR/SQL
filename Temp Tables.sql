@@ -17,7 +17,7 @@ Columns
 	TotalDue
 	OrderRank
 
-Ctes
+Tenp #Tables
 Sales
 AvgSalesMinusTop10
 Purchases
