@@ -80,7 +80,7 @@ DROP TABLE #AvgSalesMinusTop10
 DROP TABLE #AvgPurchasesMinusTop10
 
 
--- CREATING TEMP TABLE
+-- CREATING TEMP TABLE ***************************************************************************************************************
 
 -- TABLE  #Sales
 DROP TABLE IF EXISTS #Sales
