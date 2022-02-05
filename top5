@@ -1,0 +1,15 @@
+SELECT
+	ProductName = a.Name
+	,ListPrice
+	,ProductSubcategory = b.Name
+	,ProductCategory = c.Name
+	,PriceRank = ROW_NUMBER() over (ORDER BY ListPrice desc)
+	,[Category Price Rank] = ROW_NUMBER() OVER(Partition by c.Name ORDER BY ListPrice desc)
+	,IIF(ROW_NUMBER() OVER(Partition by c.Name ORDER BY ListPrice desc) <=5,'Top 5','No')
+	
+FROM Production.Product as a
+INNER JOIN Production.ProductSubcategory AS b
+	ON A.ProductSubcategoryID = B.ProductSubcategoryID
+INNER JOIN Production.ProductCategory as c
+	ON B.ProductCategoryID = C.ProductCategoryID
+GO
