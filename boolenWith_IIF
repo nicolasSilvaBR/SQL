@@ -1,0 +1,15 @@
+SELECT
+	NOME
+	,SEXO
+	,Masculino = iif (SEXO = 'Masculino',1,0)
+	,Feminino = iif(SEXO ='Feminino',1,0)
+FROM [dbo].[funcionarios]
+
+NOME	      SEXO	      Masculino	Feminino
+Kelley	    Feminino	  0         	1
+Armstrong	  Masculino	  1	          0
+Carr	      Masculino	  1	          0
+Murray	    Feminino	  0	          1
+Ellis	      Feminino	  0	          1
+Phillips	  Masculino	  1	          0
+
