@@ -26,17 +26,37 @@ products from Production.Product contained within the given subcategory
 
 */
 
-SELECT
-	SubcategoryName = a.Name
-	,ProductsName = 
-		STUFF(
-		(
-		SELECT 
-			',' + b.Name		
-		FROM Production.Product AS B
-		WHERE a.ProductSubcategoryID = b.ProductSubcategoryID
-		FOR XML PATH ('')
-		)
-		,1,1,'')
+SELECT *
+FROM Production.ProductSubcategory
+--
+SELECT *
+from Production.Product
 
+-- FOR XML PATH
+SELECT
+	',' + name
+FROM Production.Product
+FOR XML PATH('')
+-- SUBQUERY FOR XML PATH
+SELECT
+	SubcategoryName = name,
+	Products = (
+		SELECT
+		',' + name
+		FROM Production.Product as b
+		WHERE B.ProductSubcategoryID = A.ProductSubcategoryID
+		FOR XML PATH('')		
+	)
+FROM Production.ProductSubcategory as a
+-- WITH STUFF
+SELECT
+	SubcategoryName = name,
+	Products = 
+	STUFF(
+			(SELECT
+			',' + name
+			FROM Production.Product as b
+			WHERE B.ProductSubcategoryID = A.ProductSubcategoryID
+			FOR XML PATH('')
+			),1,1,'')
 FROM Production.ProductSubcategory as a
