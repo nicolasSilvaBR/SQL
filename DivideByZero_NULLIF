@@ -1,0 +1,8 @@
+SELECT
+	[location]
+	,[date]
+	,[total_cases]
+	,[total_deaths]
+	,DeathPercentage = (total_deaths* 1.0)*1 / NULLIF(total_cases,0)
+		
+FROM [dbo].[CovidDeaths]
