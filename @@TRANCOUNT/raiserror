@@ -1,4 +1,23 @@
- if @@TRANCOUNT > 0 and @nNumeroError > 0 begin
+Declare @nNumeroError int 
+
+Begin 
+
+   Begin transaction
+
+   Update tCADCliente 
+      Set mCredito = 100 
+    Where iidcliente = 34
+   
+   Update tCADLivro 
+      Set nPaginas = 100 
+	Where iIDLivro = 137
+
+   Delete From tCADLivro -- Aqui vai ocorrer um erro!!!
+    Where iIDLivro= 137
+   
+   set @nNumeroError = @@ERROR
+
+   if @@TRANCOUNT > 0 and @nNumeroError > 0 begin
       raiserror('Desfazendo. Código do erro gerado %d',10,1,@nNumeroError) 
       rollback
    end
@@ -7,3 +26,5 @@
       raiserror('Confirmando',10,1)
       Commit
    end 
+
+End 
