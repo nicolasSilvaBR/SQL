@@ -1,0 +1,9 @@
+ if @@TRANCOUNT > 0 and @nNumeroError > 0 begin
+      raiserror('Desfazendo. Código do erro gerado %d',10,1,@nNumeroError) 
+      rollback
+   end
+
+   if @@TRANCOUNT > 0 and @nNumeroError = 0 begin
+      raiserror('Confirmando',10,1)
+      Commit
+   end 
